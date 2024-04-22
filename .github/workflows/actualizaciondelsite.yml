@@ -1,0 +1,23 @@
+name: Deploy a servidor local
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: SSH Setup
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.skynet }}
+
+    - name: Deploy de cambios
+      run: |
+        ssh root@skynet.vcloud01.com "cd /usr/share/nginx/html/ && git pull origin main"
