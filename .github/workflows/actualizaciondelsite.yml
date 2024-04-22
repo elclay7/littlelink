@@ -20,4 +20,4 @@ jobs:
 
     - name: Deploy de cambios
       run: |
-        ssh root@skynet.vcloud01.com "cd /usr/share/nginx/html/ && git pull origin main"
+        ssh -p 7422 root@skynet.vcloud01.com "cd /usr/share/nginx/html/ && git pull origin main"
