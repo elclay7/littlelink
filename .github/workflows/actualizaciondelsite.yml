@@ -19,6 +19,6 @@ jobs:
         host: skynet.vcloud01.com
         username: root
         port: 7422
-        key: ${{ secrets.SSH_PRIVATE_KEY_SKYNET }}
+        key: ${{ secrets.SSH_PUBLIC_KEY_SKYNET }}
         script: |
           docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/* && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
