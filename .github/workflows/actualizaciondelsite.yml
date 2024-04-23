@@ -21,6 +21,4 @@ jobs:
         port: 7422
         key: ${{ secrets.SSH_PRIVATE_KEY_SKYNET }}
         script: |
-          docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/*"
-          git clone https://github.com/elclay7/misurls /tmp/misurls
-          mv /tmp/misurls/* /usr/share/nginx/html/
+          docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/* && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
