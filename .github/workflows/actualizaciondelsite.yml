@@ -21,4 +21,4 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-          script: docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/* && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
+          script: docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
