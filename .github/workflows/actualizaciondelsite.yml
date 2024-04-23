@@ -13,12 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: SSH into Docker Server and deploy
-        uses: appleboy/ssh-action@master
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v1.0.3
+            
         with:
-          host: skynet.vcloud01.com
-          username: root
-          port: 7422
-          key: ${{ secrets.SSH_PRIVATE_KEY_SKYNET }}
-          script: |
-            docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/* && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/* && git clone https://github.com/elclay7/misurls /usr/share/nginx/html/"
