@@ -1,4 +1,4 @@
-name: Deploy a servidor local
+name: Deploy to Docker Container
 
 on:
   push:
@@ -13,11 +13,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: SSH Setup
-      uses: webfactory/ssh-agent@v0.5.3
+    - name: SSH into Docker Server and deploy
+      uses: appleboy/ssh-action@master
       with:
-        ssh-private-key: ${{ secrets.skynet }}
-
-    - name: Deploy de cambios
-      run: |
-        ssh -p 7422 root@skynet.vcloud01.com "cd /usr/share/nginx/html/ && git pull origin main"
+        host: skynet.vcloud01.com
+        username: root
+        port: 7422
+        key: ${{ secrets.SSH_PRIVATE_KEY_SKYNET }}
+        script: |
+          docker exec ngnix-misurls sh -c "rm -rf /usr/share/nginx/html/*"
+          git clone https://github.com/elclay7/misurls /tmp/misurls
+          mv /tmp/misurls/* /usr/share/nginx/html/
